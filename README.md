@@ -100,6 +100,28 @@ If you are looking for a stable version, please use the `master` or tags labelle
 
 ## Deployment
 
+### Custom Docker image for Boring Ordinary
+
+This fork publishes a custom self-hosted image with the website live-chat widget attribution hidden:
+
+```text
+ghcr.io/boringordinary/chatwoot:latest
+```
+
+Use the same image for both the Rails and Sidekiq services. Existing Postgres, Redis, and storage volumes do not need to change.
+
+For Docker Compose or Dokploy deployments, replace each Chatwoot service image:
+
+```yaml
+image: chatwoot/chatwoot:latest
+```
+
+with:
+
+```yaml
+image: ghcr.io/boringordinary/chatwoot:latest
+```
+
 ### Heroku one-click deploy
 
 Deploying Chatwoot to Heroku is a breeze. It's as simple as clicking this button:
