@@ -1,6 +1,12 @@
+x-chatwoot-build: &chatwoot-build
+  context: .
+  dockerfile: docker/Dockerfile
+
 services:
   rails:
-    image: ghcr.io/boringordinary/chatwoot:latest
+    image: chatwoot-local:latest
+    build: *chatwoot-build
+    pull_policy: build
     env_file:
       - .env
     depends_on:
@@ -19,7 +25,9 @@ services:
     restart: always
 
   sidekiq:
-    image: ghcr.io/boringordinary/chatwoot:latest
+    image: chatwoot-local:latest
+    build: *chatwoot-build
+    pull_policy: build
     env_file:
       - .env
     depends_on:
