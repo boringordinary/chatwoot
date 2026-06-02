@@ -1,5 +1,18 @@
 version: '3'
 
+x-chatwoot-storage-env: &chatwoot-storage-env
+  ACTIVE_STORAGE_SERVICE: "${ACTIVE_STORAGE_SERVICE:-local}"
+  S3_BUCKET_NAME: "${S3_BUCKET_NAME:-}"
+  AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID:-}"
+  AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY:-}"
+  AWS_REGION: "${AWS_REGION:-}"
+  STORAGE_ACCESS_KEY_ID: "${STORAGE_ACCESS_KEY_ID:-}"
+  STORAGE_SECRET_ACCESS_KEY: "${STORAGE_SECRET_ACCESS_KEY:-}"
+  STORAGE_REGION: "${STORAGE_REGION:-}"
+  STORAGE_BUCKET_NAME: "${STORAGE_BUCKET_NAME:-}"
+  STORAGE_ENDPOINT: "${STORAGE_ENDPOINT:-}"
+  STORAGE_FORCE_PATH_STYLE: "${STORAGE_FORCE_PATH_STYLE:-false}"
+
 services:
   base: &base
     build:
@@ -22,8 +35,9 @@ services:
     ports:
       - 3000:3000
     environment:
-      - NODE_ENV=production
-      - RAILS_ENV=production
+      <<: *chatwoot-storage-env
+      NODE_ENV: production
+      RAILS_ENV: production
     entrypoint: docker/entrypoints/rails.sh
     command: ['bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0']
 
@@ -34,8 +48,9 @@ services:
       - postgres
       - redis
     environment:
-      - NODE_ENV=production
-      - RAILS_ENV=production
+      <<: *chatwoot-storage-env
+      NODE_ENV: production
+      RAILS_ENV: production
     command: ['bundle', 'exec', 'sidekiq', '-C', 'config/sidekiq.yml']
 
   postgres:
