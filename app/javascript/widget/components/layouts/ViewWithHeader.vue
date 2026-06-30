@@ -134,7 +134,7 @@ export default {
       </div>
       <Banner />
       <router-view />
-      <div v-if="hasBottomSpacing" class="h-9 shrink-0" aria-hidden="true" />
+      <div v-if="hasBottomSpacing" class="h-7 shrink-0" aria-hidden="true" />
     </div>
   </div>
 </template>
