@@ -45,6 +45,9 @@ export default {
         this.$route.name
       );
     },
+    hasBottomSpacing() {
+      return !['article-viewer'].includes(this.$route.name);
+    },
     isOnHomeView() {
       return ['home'].includes(this.$route.name);
     },
@@ -131,6 +134,7 @@ export default {
       </div>
       <Banner />
       <router-view />
+      <div v-if="hasBottomSpacing" class="h-9 shrink-0" aria-hidden="true" />
     </div>
   </div>
 </template>
