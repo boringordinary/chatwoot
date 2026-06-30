@@ -27,8 +27,8 @@ services:
       - redis
     volumes:
       - storage_data:/app/storage
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       <<: *chatwoot-storage-env
       NODE_ENV: production
