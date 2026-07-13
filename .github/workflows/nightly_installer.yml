@@ -5,13 +5,11 @@
 # # chatwoot on an Ubuntu 22.04 machine using
 # # the linux installer script.
 # #
-# # This is set to run daily at midnight.
+# # This workflow can be run manually when installer verification is needed.
 # #
 
 name: Run Linux nightly installer
 on:
-  schedule:
-    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions:
